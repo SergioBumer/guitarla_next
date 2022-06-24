@@ -6,7 +6,7 @@ const Blog = ({ entradas }) => {
   console.log(entradas);
   return (
     <Layout pagina="Blog">
-      <h1>Desde Blog</h1>
+      <h1 className="heading">Blog</h1>
       <div className={styles.blog}>
         {entradas.map((entrada) => (
           <Entrada key={entrada.id} entrada={entrada}/>
