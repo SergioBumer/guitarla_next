@@ -17,7 +17,7 @@ const Blog = ({ entradas }) => {
 };
 
 export async function getStaticProps() {
-  const url = "http://localhost:1337/blogs";
+  const url = "http://localhost:1337/blogs?_sort=created_at:desc";
   const respuesta = await fetch(url);
   const entradas = await respuesta.json();
   return { props: { entradas } };

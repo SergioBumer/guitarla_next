@@ -7,18 +7,17 @@ const tienda = ({ guitarras }) => {
     <Layout pagina="Tienda Virtual">
       <main>
         <h1 className="heading">Nuestros Productos</h1>
-        <Listado guitarras={guitarras} />
+        <Listado className="contenedor" guitarras={guitarras} />
       </main>
     </Layout>
   );
 };
 
 export async function getServerSideProps({ query: { id } }) {
-  const url = `${process.env.API_URL}/guitarras`;
+  const url = `${process.env.API_URL}/guitarras?_sort=precio:asc`;
   const respuesta = await fetch(url);
   const guitarras = await respuesta.json();
 
-  console.log(guitarras);
   return { props: { guitarras } };
 }
 export default tienda;
