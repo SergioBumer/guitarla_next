@@ -41,6 +41,9 @@
   color: var(--negro);
   border: 2px solid var(--primary);
   padding: 1rem 4rem;
+
+  transition-property: background-color;
+  transition-duration: .3s;
 }
 
 .enlace:hover {
