@@ -3,7 +3,6 @@ import Layout from "../components/Layout";
 import styles from '../styles/Blog.module.css';
 
 const Blog = ({ entradas }) => {
-  console.log(entradas);
   return (
     <Layout pagina="Blog">
       <h1 className="heading">Blog</h1>

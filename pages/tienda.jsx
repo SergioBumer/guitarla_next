@@ -2,7 +2,6 @@ import Layout from "../components/Layout";
 import Listado from "../components/Listado";
 
 const tienda = ({ guitarras }) => {
-  console.log(guitarras);
   return (
     <Layout pagina="Tienda Virtual">
       <main>

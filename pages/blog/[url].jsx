@@ -6,7 +6,6 @@ import styles from "../../styles/Entrada.module.css";
 
 const EntradaBlog = ({ entrada }) => {
   const router = useRouter();
-  console.log(entrada);
   const { contenido, imagen, published_at, titulo } = entrada;
   return (
     <Layout>
@@ -36,13 +35,11 @@ export async function getStaticPaths() {
   const respuesta = await fetch(newUrl);
   const entradas = await respuesta.json();
 
-  console.log(entradas);
 
   const paths = entradas.map((entrada) => ({
     params: { url: entrada.url },
   }));
 
-  console.log(paths);
 
   return { paths, fallback: false };
 }
@@ -52,7 +49,6 @@ export async function getStaticProps({ params: { url } }) {
   const respuesta = await fetch(newUrl);
   const entrada = await respuesta.json();
 
-  console.log(entrada);
   return { props: { entrada: entrada[0] } };
 }
 
@@ -61,7 +57,6 @@ export async function getStaticProps({ params: { url } }) {
   const respuesta = await fetch(url);
   const entrada = await respuesta.json();
 
-  console.log(entrada);
   return { props: { entrada } };
 } */
 

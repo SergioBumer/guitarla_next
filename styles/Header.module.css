@@ -28,6 +28,7 @@
   margin-top: 5rem;
   display: flex;
   gap: 2rem;
+  z-index: 3;
 }
 
 @media (min-width: 768px) {
@@ -45,7 +46,7 @@
   padding: 0.5rem;
   transition-property: background-color;
   transition-duration: 0.3s;
-  z-index: 3;
+  
 }
 
 .navegacion a:hover {

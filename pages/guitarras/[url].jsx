@@ -1,10 +1,30 @@
 import Layout from "../../components/Layout";
 import Image from "next/image";
 import styles from "../../styles/Guitarra.module.css";
+import { useState } from "react";
 // import Link from "next/link";
 
-const Producto = ({ producto }) => {
-  const { descripcion, imagen, precio, nombre, url, published_at } = producto;
+const Producto = ({ producto, agregarCarrito }) => {
+  const { descripcion, imagen, precio, nombre, url, published_at, id } =
+    producto;
+  const [cantidad, setCantidad] = useState(1);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (cantidad < 1) {
+      alert("Cantidad no válida");
+      return;
+    }
+
+    const guitarraSeleccionada = {
+      id,
+      imagen: imagen.url,
+      nombre,
+      precio,
+      cantidad,
+    };
+
+    agregarCarrito(guitarraSeleccionada);
+  };
   return (
     <Layout pagina={`Guitarra ${nombre}`}>
       <div>
@@ -21,10 +41,13 @@ const Producto = ({ producto }) => {
             <p className={styles.resumen}>{descripcion}</p>
             <p className={styles.precio}>$ {precio}</p>
 
-            <form className={styles.formulario}>
+            <form className={styles.formulario} onSubmit={handleSubmit}>
               <label>Cantidad</label>
-              <select>
-                <option value="">Seleccione</option>
+              <select
+                value={cantidad}
+                onChange={(e) => setCantidad(parseInt(e.target.value))}
+              >
+                <option value="0">Seleccione</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -45,13 +68,9 @@ export async function getStaticPaths() {
   const respuesta = await fetch(newUrl);
   const entradas = await respuesta.json();
 
-  console.log(entradas);
-
   const paths = entradas.map((entrada) => ({
     params: { url: entrada.url },
   }));
-
-  console.log(paths);
 
   return { paths, fallback: false };
 }
@@ -61,7 +80,6 @@ export async function getStaticProps({ params: { url } }) {
   const respuesta = await fetch(newUrl);
   const entrada = await respuesta.json();
 
-  console.log(entrada);
   return { props: { entrada: entrada[0] } };
 } */
 
@@ -70,7 +88,6 @@ export async function getServerSideProps({ query: { url } }) {
   const respuesta = await fetch(productUrl);
   const producto = await respuesta.json();
 
-  console.log(producto);
   return { props: { producto: producto[0] } };
 }
 
